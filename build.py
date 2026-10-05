@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+import os
+
+output_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinceanero-angeles\index.html"
+
+html_code = """<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -2294,7 +2298,7 @@
         return;
       }
 
-      const textMsg = `¡Hola Angeles! 🪩✨\nSoy *${guestName}* y confirmo mi asistencia a tu fiesta de 15 años Disco Party (19 de Octubre):\n👉 *${guestChoice}*`;
+      const textMsg = `¡Hola Angeles! 🪩✨\\nSoy *${guestName}* y confirmo mi asistencia a tu fiesta de 15 años Disco Party (19 de Octubre):\\n👉 *${guestChoice}*`;
       const wpUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(textMsg)}`;
       
       window.open(wpUrl, "_blank");
@@ -2413,9 +2417,9 @@
       const currentSongs = getGuestSongs();
       if (currentSongs.length === 0) return;
 
-      let msg = "¡Hola Angeles! 🪩🎶 Mis canciones sugeridas para tu fiesta de 15 años son:\n";
+      let msg = "¡Hola Angeles! 🪩🎶 Mis canciones sugeridas para tu fiesta de 15 años son:\\n";
       currentSongs.forEach((s, idx) => {
-        msg += `${idx + 1}. *${s.title}* - ${s.artist}\n`;
+        msg += `${idx + 1}. *${s.title}* - ${s.artist}\\n`;
       });
 
       const wpUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(msg)}`;
@@ -2458,3 +2462,9 @@
   </script>
 </body>
 </html>
+"""
+
+with open(output_path, "w", encoding="utf-8") as f:
+    f.write(html_code)
+
+print(f"index.html quirúrgicamente adaptado a la nueva paleta Azul/Cian/Violeta. Tamaño: {len(html_code)} bytes")
