@@ -1,4 +1,8 @@
-import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinceanero-angeles\index.html"\n\nhtml_code = '''<!DOCTYPE html>
+import os
+
+output_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinceanero-angeles\index.html"
+
+html_code = """<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -877,7 +881,7 @@ import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinc
       border: 1px solid rgba(255, 0, 127, 0.35);
       border-radius: 18px;
       padding: 16px 14px;
-      margin-bottom: 16px;
+      margin-bottom: 0;
       box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 4px 15px rgba(255, 0, 127, 0.2);
       display: flex;
       flex-direction: column;
@@ -993,17 +997,6 @@ import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinc
       0% { transform: scaleY(0.25); filter: brightness(0.85); }
       50% { transform: scaleY(0.95); filter: brightness(1.25); }
       100% { transform: scaleY(0.4); filter: brightness(1.0); }
-    }
-
-    .ambiente-host-note {
-      font-size: 0.82rem;
-      color: var(--neon-pink-light);
-      line-height: 1.45;
-      background: rgba(255, 0, 127, 0.12);
-      border: 1px dashed rgba(255, 0, 127, 0.35);
-      border-radius: 12px;
-      padding: 10px 14px;
-      width: 100%;
     }
 
     /* =======================================================
@@ -1617,10 +1610,6 @@ import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinc
               <div class="eq-column eq-col-11"></div>
               <div class="eq-column eq-col-12"></div>
             </div>
-          </div>
-
-          <div class="ambiente-host-note">
-            Si deseas aportar con algo, pregunta al anfitrión de la fiesta.
           </div>
         </div>
 
@@ -2339,4 +2328,9 @@ import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinc
   </script>
 </body>
 </html>
-'''\n\nwith open(output_path, "w", encoding="utf-8") as f:\n    f.write(html_code)\n\nprint("index.html generado exitosamente.")\n
+"""
+
+with open(output_path, "w", encoding="utf-8") as out_f:
+    out_f.write(html_code)
+
+print("Build compiled successfully!")
