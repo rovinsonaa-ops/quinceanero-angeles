@@ -328,21 +328,6 @@
       display: block;
     }
 
-    .disco-drag-hint {
-      position: absolute;
-      bottom: 8px;
-      font-size: 0.72rem;
-      color: var(--neon-pink-light);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      background: rgba(14, 14, 22, 0.75);
-      border: 1px solid rgba(255, 0, 127, 0.4);
-      padding: 4px 12px;
-      border-radius: 20px;
-      pointer-events: none;
-      box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
-    }
-
     /* CALENDARIO DE OCTUBRE 2026 */
     .calendar-wrapper {
       width: 100%;
@@ -593,37 +578,37 @@
       line-height: 1.4;
     }
 
-    /* DETALLES DE FECHA, HORA Y DIRECCIÓN */
+    /* DETALLES DE FECHA, HORA Y DIRECCIÓN (COMPACTO Y ELEGANTE) */
     .event-coords-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-bottom: 24px;
+      gap: 6px;
+      margin-bottom: 15px;
     }
 
     .coord-card-item {
       background: var(--card-inner-box);
-      border: 1px solid rgba(255, 0, 127, 0.25);
-      border-radius: 16px;
-      padding: 14px 16px;
+      border: 1px solid rgba(255, 0, 127, 0.22);
+      border-radius: 12px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       text-align: left;
     }
 
     .coord-icon-orb {
-      width: 46px;
-      height: 46px;
-      min-width: 46px;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
       border-radius: 50%;
       background: linear-gradient(135deg, rgba(255, 0, 127, 0.3), rgba(157, 78, 221, 0.2));
-      border: 1.5px solid var(--neon-fuchsia);
+      border: 1.2px solid var(--neon-fuchsia);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 10px rgba(255, 0, 127, 0.35);
+      box-shadow: 0 0 8px rgba(255, 0, 127, 0.3);
     }
 
     .coord-data-block {
@@ -633,40 +618,43 @@
 
     .coord-type-lbl {
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       color: var(--neon-pink-light);
       text-transform: uppercase;
+      line-height: 1.1;
     }
 
     .coord-val-txt {
-      font-size: 0.95rem;
+      font-size: 0.86rem;
       font-weight: 700;
       color: #ffffff;
-      margin-top: 2px;
+      margin-top: 1px;
+      line-height: 1.2;
     }
 
     .btn-maps-action {
-      min-height: 50px;
+      min-height: 40px;
       background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
       color: #ffffff;
       border: none;
-      padding: 15px 24px;
+      padding: 9px 16px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.92rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       border-radius: 50px;
       cursor: pointer;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 20px rgba(0, 180, 216, 0.4);
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
       text-decoration: none;
       transition: transform 0.2s;
+      margin-top: 2px;
     }
 
     .btn-maps-action:active {
@@ -812,9 +800,9 @@
     .ambiente-live-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 0, 127, 0.15);
-      border: 1px solid var(--neon-fuchsia);
+      gap: 7px;
+      background: rgba(255, 0, 51, 0.12);
+      border: 1px solid rgba(255, 0, 51, 0.65);
       padding: 4px 14px;
       border-radius: 50px;
       font-size: 0.72rem;
@@ -823,21 +811,21 @@
       letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 12px;
-      box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+      box-shadow: 0 0 14px rgba(255, 0, 51, 0.35);
     }
 
-    .live-dot-pulse {
+    .live-dot-pulse-red {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #ff007f;
-      box-shadow: 0 0 8px #ff007f;
-      animation: liveDotBlink 1.2s infinite ease-in-out;
+      background: #ff0033;
+      box-shadow: 0 0 10px #ff0033, 0 0 18px rgba(255, 0, 51, 0.9);
+      animation: redDotBlink 1.1s infinite ease-in-out;
     }
 
-    @keyframes liveDotBlink {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.7); }
+    @keyframes redDotBlink {
+      0%, 100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 12px #ff0033, 0 0 20px #ff0033; }
+      50% { opacity: 0.2; transform: scale(0.7); box-shadow: 0 0 2px #ff0033; }
     }
 
     .ambiente-title {
@@ -955,44 +943,53 @@
       100% { left: 20px; }
     }
 
-    /* ECUALIZADOR ANIMADO LED NEÓN */
+    /* ECUALIZADOR ANIMADO ESTILO DISCO AÑOS 80 (MULTICOLOR RETRO) */
     .equalizer-spectrum-bar {
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      gap: 4px;
-      height: 46px;
+      gap: 3px;
+      height: 52px;
       width: 100%;
-      padding: 0 8px;
+      padding: 0 6px 4px 6px;
+      background: rgba(4, 3, 8, 0.85);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.95);
     }
 
     .eq-column {
       flex: 1;
-      max-width: 10px;
-      background: linear-gradient(180deg, #ffffff 0%, var(--neon-pink) 30%, var(--neon-fuchsia) 60%, var(--neon-violet) 100%);
-      border-radius: 3px 3px 1px 1px;
-      box-shadow: 0 0 6px rgba(255, 0, 127, 0.45);
+      max-width: 12px;
+      border-radius: 2px 2px 0 0;
       transform-origin: bottom;
-      animation: eqBounce 1.2s ease-in-out infinite alternate;
+      animation: eqBounce80s 1.2s ease-in-out infinite alternate;
+      /* Segmentación LED clásica ochentera (Verde neón -> Amarillo neón -> Naranja -> Rojo/Fucsia) */
+      background: 
+        repeating-linear-gradient(180deg, transparent 0px, transparent 2px, rgba(0, 0, 0, 0.55) 2px, rgba(0, 0, 0, 0.55) 4px),
+        linear-gradient(to top, #00ff66 0%, #00ff66 32%, #ffee00 58%, #ff6600 78%, #ff0044 100%);
+      box-shadow: 0 0 8px rgba(0, 255, 102, 0.4), 0 0 14px rgba(255, 0, 68, 0.35);
     }
 
-    .eq-col-1  { height: 40%; animation-delay: 0.1s; animation-duration: 0.8s; }
-    .eq-col-2  { height: 75%; animation-delay: 0.3s; animation-duration: 1.1s; }
-    .eq-col-3  { height: 50%; animation-delay: 0.0s; animation-duration: 0.9s; }
-    .eq-col-4  { height: 90%; animation-delay: 0.4s; animation-duration: 1.3s; }
-    .eq-col-5  { height: 60%; animation-delay: 0.2s; animation-duration: 0.7s; }
-    .eq-col-6  { height: 95%; animation-delay: 0.5s; animation-duration: 1.0s; }
-    .eq-col-7  { height: 45%; animation-delay: 0.15s; animation-duration: 1.2s; }
-    .eq-col-8  { height: 85%; animation-delay: 0.35s; animation-duration: 0.85s; }
-    .eq-col-9  { height: 70%; animation-delay: 0.25s; animation-duration: 1.15s; }
-    .eq-col-10 { height: 90%; animation-delay: 0.45s; animation-duration: 0.95s; }
-    .eq-col-11 { height: 55%; animation-delay: 0.1s; animation-duration: 1.05s; }
-    .eq-col-12 { height: 80%; animation-delay: 0.3s; animation-duration: 0.8s; }
+    .eq-col-1  { height: 42%; animation-delay: 0.1s; animation-duration: 0.8s; }
+    .eq-col-2  { height: 80%; animation-delay: 0.3s; animation-duration: 1.1s; }
+    .eq-col-3  { height: 55%; animation-delay: 0.05s; animation-duration: 0.9s; }
+    .eq-col-4  { height: 95%; animation-delay: 0.4s; animation-duration: 1.3s; }
+    .eq-col-5  { height: 65%; animation-delay: 0.2s; animation-duration: 0.75s; }
+    .eq-col-6  { height: 100%; animation-delay: 0.5s; animation-duration: 1.05s; }
+    .eq-col-7  { height: 50%; animation-delay: 0.15s; animation-duration: 1.2s; }
+    .eq-col-8  { height: 90%; animation-delay: 0.35s; animation-duration: 0.85s; }
+    .eq-col-9  { height: 75%; animation-delay: 0.25s; animation-duration: 1.15s; }
+    .eq-col-10 { height: 95%; animation-delay: 0.45s; animation-duration: 0.95s; }
+    .eq-col-11 { height: 60%; animation-delay: 0.1s; animation-duration: 1.05s; }
+    .eq-col-12 { height: 85%; animation-delay: 0.3s; animation-duration: 0.8s; }
+    .eq-col-13 { height: 70%; animation-delay: 0.2s; animation-duration: 1.1s; }
+    .eq-col-14 { height: 90%; animation-delay: 0.4s; animation-duration: 0.9s; }
 
-    @keyframes eqBounce {
-      0% { transform: scaleY(0.25); filter: brightness(0.85); }
-      50% { transform: scaleY(0.95); filter: brightness(1.25); }
-      100% { transform: scaleY(0.4); filter: brightness(1.0); }
+    @keyframes eqBounce80s {
+      0% { transform: scaleY(0.2); filter: brightness(0.9); }
+      50% { transform: scaleY(0.98); filter: brightness(1.35); }
+      100% { transform: scaleY(0.38); filter: brightness(1.0); }
     }
 
     /* =======================================================
@@ -1362,7 +1359,6 @@
       <!-- BOLA DISCO 3D REAL CON REFLEJOS EN TIEMPO REAL (THREE.JS) -->
       <div class="disco-3d-stage" id="disco-3d-stage">
         <canvas id="disco-three-canvas"></canvas>
-        <div class="disco-drag-hint">Gira la esfera ✦</div>
       </div>
 
       <!-- CALENDARIO DE OCTUBRE 2026 -->
@@ -1475,7 +1471,7 @@
         <div class="event-coords-list">
           <div class="coord-card-item">
             <div class="coord-icon-orb">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
                 <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -1490,7 +1486,7 @@
 
           <div class="coord-card-item">
             <div class="coord-icon-orb">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
@@ -1503,7 +1499,7 @@
 
           <div class="coord-card-item">
             <div class="coord-icon-orb">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
@@ -1564,8 +1560,8 @@
         <!-- SECCIÓN AMBIENTE & DJ ANIMADO (GLAMOUR EDITION) -->
         <div class="ambiente-disco-card">
           <div class="ambiente-live-badge">
-            <span class="live-dot-pulse"></span>
-            EN VIVO • DJ SESSION
+            <span class="live-dot-pulse-red"></span>
+            MÚSICA EN VIVO
           </div>
           <div class="ambiente-title">AMBIENTE</div>
           <div class="ambiente-vibe-tag">¡ALOCADO!</div>
@@ -1591,7 +1587,7 @@
               </div>
             </div>
 
-            <!-- ECUALIZADOR ANIMADO DE AUDIO NEÓN -->
+            <!-- ECUALIZADOR ANIMADO DISCO AÑOS 80 (MULTICOLOR RETRO) -->
             <div class="equalizer-spectrum-bar">
               <div class="eq-column eq-col-1"></div>
               <div class="eq-column eq-col-2"></div>
@@ -1605,6 +1601,8 @@
               <div class="eq-column eq-col-10"></div>
               <div class="eq-column eq-col-11"></div>
               <div class="eq-column eq-col-12"></div>
+              <div class="eq-column eq-col-13"></div>
+              <div class="eq-column eq-col-14"></div>
             </div>
           </div>
         </div>
@@ -1785,7 +1783,7 @@
       discoCyanLightRef = cyanLight;
 
       // Luz Blanca Cenital
-      const whiteLight = new THREE.DirectionalLight(0xffffff, 4.2);
+      const whiteLight = new THREE.DirectionalLight(0xffffff, 5.8);
       whiteLight.position.set(0, 6, 6);
       scene.add(whiteLight);
       discoWhiteLightRef = whiteLight;
@@ -1821,16 +1819,17 @@
       discoSphereRef = sphereMesh;
 
       // Proyección de destellos y chispas de luz alrededor
-      const spotCount = 180;
+      const spotCount = 280;
       const spotsGeo = new THREE.BufferGeometry();
       const posArr = new Float32Array(spotCount * 3);
       const colArr = new Float32Array(spotCount * 3);
 
       const colorPalette = [
-        new THREE.Color(0xff007f), // Fucsia
-        new THREE.Color(0xff3399), // Rosa
-        new THREE.Color(0x9d4edd), // Violeta
-        new THREE.Color(0x00d4ff), // Cian
+        new THREE.Color(0xffffff), // Blanco diamante
+        new THREE.Color(0xffffff), // Plata pura
+        new THREE.Color(0xe2e8f0), // Plata clara
+        new THREE.Color(0xff007f), // Fucsia neón
+        new THREE.Color(0x00e5ff), // Cian eléctrico
         new THREE.Color(0xffffff)  // Blanco
       ];
 
@@ -1870,7 +1869,7 @@
       }
 
       const spotsMat = new THREE.PointsMaterial({
-        size: 0.32,
+        size: 0.38,
         vertexColors: true,
         map: createSpotTexture(),
         transparent: true,
@@ -2016,8 +2015,9 @@
         this.twinkleDir = 1;
 
         // Paleta Glamour: Blanco, Fucsia, Rosa, Violeta, Azul Cian, Rosa Pastel, Dorado
+        // Chispas de brillo plateadas y claras notorias
         const colors = [
-          '#ffffff', '#ff007f', '#ff3399', '#9d4edd', '#00d4ff', '#fbcfe8', '#fcd34d'
+          '#ffffff', '#ffffff', '#eaf7ff', '#f8fafc', '#ffffff', '#ff007f', '#ff75b5', '#cbd5e1'
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -2048,24 +2048,33 @@
         ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
 
         if (this.type === 0) {
-          // Tipo A: Punto luminoso
+          // Tipo A: Chispa de cristal brillante plateada
+          ctx.shadowColor = '#ffffff';
+          ctx.shadowBlur = 6;
           ctx.fillStyle = this.color;
           ctx.beginPath();
-          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.arc(0, 0, this.size * 1.1, 0, Math.PI * 2);
           ctx.fill();
+          ctx.shadowBlur = 0;
         } else if (this.type === 1) {
-          // Tipo B: Fragmento de espejo
-          ctx.fillStyle = this.color;
-          ctx.fillRect(-this.size, -this.size * 0.6, this.size * 2, this.size * 1.2);
-        } else if (this.type === 2) {
-          // Tipo C: Estrella de 4 puntas
+          // Tipo B: Fragmento de espejo plateado brillante
+          ctx.shadowColor = '#ffffff';
+          ctx.shadowBlur = 8;
           ctx.fillStyle = '#ffffff';
-          ctx.fillRect(-this.size * 2.2, -0.8, this.size * 4.4, 1.6);
-          ctx.fillRect(-0.8, -this.size * 2.2, 1.6, this.size * 4.4);
+          ctx.fillRect(-this.size, -this.size * 0.7, this.size * 2, this.size * 1.4);
+          ctx.shadowBlur = 0;
+        } else if (this.type === 2) {
+          // Tipo C: Estrella de brillo plateado de 4 puntas de alta visibilidad
+          ctx.shadowColor = '#ffffff';
+          ctx.shadowBlur = 10;
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(-this.size * 2.8, -1.0, this.size * 5.6, 2.0);
+          ctx.fillRect(-1.0, -this.size * 2.8, 2.0, this.size * 5.6);
           ctx.fillStyle = this.color;
           ctx.beginPath();
-          ctx.arc(0, 0, this.size * 0.8, 0, Math.PI * 2);
+          ctx.arc(0, 0, this.size * 1.1, 0, Math.PI * 2);
           ctx.fill();
+          ctx.shadowBlur = 0;
         } else {
           // Tipo D: Bokeh suave
           ctx.fillStyle = this.color;
@@ -2079,7 +2088,7 @@
     }
 
     // Inicializar partículas ambientales
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 95; i++) {
       particlesList.push(new DiscoParticle(false));
     }
 
