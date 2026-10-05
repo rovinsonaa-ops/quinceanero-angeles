@@ -1,4 +1,9 @@
-import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinceanero-angeles\index.html"\n\nhtml_code = '''<!DOCTYPE html>
+import os
+
+output_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinceanero-angeles\index.html"
+build_py_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinceanero-angeles\build.py"
+
+html_code = """<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -2175,7 +2180,7 @@ import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinc
         return;
       }
 
-      const textMsg = `¡Hola Angeles! 🪩✨\nSoy *${guestName}* y confirmo mi asistencia a tu fiesta de 15 años Disco Party (19 de Octubre):\n👉 *${guestChoice}*`;
+      const textMsg = `¡Hola Angeles! 🪩✨\\nSoy *${guestName}* y confirmo mi asistencia a tu fiesta de 15 años Disco Party (19 de Octubre):\\n👉 *${guestChoice}*`;
       const wpUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(textMsg)}`;
       
       window.open(wpUrl, "_blank");
@@ -2294,9 +2299,9 @@ import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinc
       const currentSongs = getGuestSongs();
       if (currentSongs.length === 0) return;
 
-      let msg = "¡Hola Angeles! 🪩🎶 Mis canciones sugeridas para tu fiesta de 15 años son:\n";
+      let msg = "¡Hola Angeles! 🪩🎶 Mis canciones sugeridas para tu fiesta de 15 años son:\\n";
       currentSongs.forEach((s, idx) => {
-        msg += `${idx + 1}. *${s.title}* - ${s.artist}\n`;
+        msg += `${idx + 1}. *${s.title}* - ${s.artist}\\n`;
       });
 
       const wpUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(msg)}`;
@@ -2339,4 +2344,14 @@ import os\n\noutput_path = r"C:\Users\Rovinson\.gemini\antigravity\scratch\quinc
   </script>
 </body>
 </html>
-'''\n\nwith open(output_path, "w", encoding="utf-8") as f:\n    f.write(html_code)\n\nprint("index.html generado exitosamente.")\n
+"""
+
+# Escribir index.html
+with open(output_path, "w", encoding="utf-8") as f:
+    f.write(html_code)
+
+# Escribir build.py para mantener consistencia
+with open(build_py_path, "w", encoding="utf-8") as f:
+    f.write(f'import os\\n\\noutput_path = r"{output_path}"\\n\\nhtml_code = \'\'\'{html_code}\'\'\'\\n\\nwith open(output_path, "w", encoding="utf-8") as f:\\n    f.write(html_code)\\n\\nprint("index.html generado exitosamente.")\\n')
+
+print(f"Versión Glamour Fucsia/Negro generada con éxito. Tamaño: {len(html_code)} bytes")

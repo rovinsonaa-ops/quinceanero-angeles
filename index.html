@@ -15,39 +15,33 @@
 
   <style>
     /* =======================================================
-       TOKENS CROMÁTICOS DISCO: AZUL ELÉCTRICO + VIOLETA + CIAN
-       (60% Negro/Azul Profundo, 25% Azul, 10% Violeta/Magenta, 5% Cian/Blanco)
+       TOKENS CROMÁTICOS DISCO GLAMOUR: NEGRO PROFUNDO + FUCSIA NEÓN + MAGENTA + VIOLETA + CIAN
        ======================================================= */
     :root {
-      --bg-black: #000000;
-      --bg-deep: #020510;
-      --bg-midnight: #050a18;
-      --card-bg: rgba(5, 12, 28, 0.92);
-      --card-border: rgba(37, 139, 255, 0.4);
-      --card-inner-box: rgba(7, 18, 43, 0.85);
+      --bg-black: #030305;
+      --bg-deep: #080510;
+      --card-bg: rgba(14, 14, 22, 0.94);
+      --card-border: rgba(255, 0, 127, 0.38);
+      --card-inner-box: rgba(22, 14, 32, 0.88);
 
-      /* Azules dominantes */
-      --disco-blue-dark: #071b5c;
-      --disco-blue-electric: #0a2fff;
-      --disco-blue-vivid: #164dff;
-      --disco-blue-bright: #258bff;
+      /* Neones Glamour */
+      --neon-fuchsia: #ff007f;
+      --neon-magenta: #e10098;
+      --neon-pink: #ff2a85;
+      --neon-pink-light: #ff75b5;
+      --neon-violet: #9d4edd;
+      --neon-violet-bright: #b5179e;
 
-      /* Ciano como luz */
-      --disco-cyan: #00d9ff;
-      --disco-cyan-bright: #5cebff;
-
-      /* Violeta y Magenta como elegancia */
-      --disco-violet: #5b1fff;
-      --disco-violet-bright: #7a2cff;
-      --disco-purple: #a855f7;
-      --disco-magenta: #d21fff;
-      --disco-pink-neon: #ff35d1;
+      /* Acentos de luz y contraste */
+      --electric-blue: #00d4ff;
+      --electric-cyan: #00e5ff;
+      --gold-accent: #f59e0b;
 
       /* Highlights y Blanco puro */
       --white-pure: #ffffff;
-      --white-ice: #eaf7ff;
+      --white-ice: #fdf2f8;
       --silver-mid: #cbd5e1;
-      --gold-accent: #f59e0b;
+      --silver-dark: #64748b;
     }
 
     * {
@@ -69,7 +63,7 @@
     }
 
     /* =======================================================
-       FONDO DISCO GLOBAL CON PROFUNDIDAD AZUL & NEÓN
+       FONDO DISCO GLOBAL & ILUMINACIÓN CINEMATOGRÁFICA
        ======================================================= */
     #ambient-bg {
       position: fixed;
@@ -81,14 +75,14 @@
       pointer-events: none;
       z-index: 0;
       background: 
-        radial-gradient(circle at 50% 12%, rgba(22, 77, 255, 0.32) 0%, transparent 60%),
-        radial-gradient(circle at 10% 70%, rgba(122, 44, 255, 0.22) 0%, transparent 50%),
-        radial-gradient(circle at 90% 75%, rgba(0, 217, 255, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 50% 88%, rgba(210, 31, 255, 0.15) 0%, transparent 45%),
-        var(--bg-deep);
+        radial-gradient(circle at 50% 15%, rgba(255, 0, 127, 0.32) 0%, transparent 60%),
+        radial-gradient(circle at 10% 70%, rgba(157, 78, 221, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(225, 0, 152, 0.15) 0%, transparent 50%),
+        var(--bg-black);
     }
 
-    /* Rayos volumétricos ambientales en azul y cian */
+    /* Rayos volumétricos ambientales sutiles en Fucsia y Blanco */
     .volumetric-rays {
       position: fixed;
       top: 0;
@@ -106,9 +100,9 @@
     .v-ray {
       position: absolute;
       top: -120px;
-      width: 2.5px;
+      width: 2.2px;
       height: 130vh;
-      background: linear-gradient(180deg, rgba(234, 247, 255, 0.9) 0%, rgba(37, 139, 255, 0.45) 40%, rgba(0, 217, 255, 0.2) 70%, transparent 90%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 0, 127, 0.45) 40%, rgba(157, 78, 221, 0.2) 70%, transparent 90%);
       filter: blur(2px);
       transform-origin: top center;
     }
@@ -121,7 +115,7 @@
     @keyframes sweepRay2 { 0% { transform: rotate(-15deg); } 100% { transform: rotate(15deg); } }
     @keyframes sweepRay3 { 0% { transform: rotate(10deg); } 100% { transform: rotate(35deg); } }
 
-    /* Canvas global de partículas y cascada */
+    /* Canvas global de partículas y destellos de luz */
     #particles-canvas {
       position: fixed;
       top: 0;
@@ -132,7 +126,7 @@
       z-index: 2;
     }
 
-    /* Flash de pantalla cinematográfico */
+    /* Flash de pantalla para la transición cinematográfica */
     #cinematic-flash {
       position: fixed;
       top: 0;
@@ -141,149 +135,116 @@
       height: 100vh;
       pointer-events: none;
       z-index: 99999;
-      background: radial-gradient(circle at center, #ffffff 15%, rgba(0, 217, 255, 0.85) 60%, rgba(22, 77, 255, 0.6) 100%);
+      background: radial-gradient(circle at center, #ffffff 15%, rgba(255, 0, 127, 0.85) 60%, rgba(157, 78, 221, 0.6) 100%);
       opacity: 0;
       transition: opacity 0.35s ease-out;
     }
 
     #cinematic-flash.active {
       opacity: 1;
-      transition: opacity 0.12s ease-in;
-    }
-
-    /* VIEWPORT CONTAINER MOBILE FIRST */
-    .app-viewport {
-      width: 100%;
-      max-width: 440px;
-      margin: 0 auto;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: max(16px, env(safe-area-inset-top));
-      padding-bottom: max(32px, env(safe-area-inset-bottom));
-      padding-left: max(16px, env(safe-area-inset-left));
-      padding-right: max(16px, env(safe-area-inset-right));
-      position: relative;
-      z-index: 10;
     }
 
     /* =======================================================
-       BOTÓN FLOTANTE DE MÚSICA — DISCO DE VINILO GIRATORIO
+       DISCO DE VINILO GIRATORIO — CONTROL DE MÚSICA FLOTANTE
        ======================================================= */
     .music-floating-ctrl {
       position: fixed;
-      top: max(14px, env(safe-area-inset-top));
-      right: max(14px, env(safe-area-inset-right));
-      z-index: 1000;
-      min-height: 48px;
-      background: rgba(5, 12, 28, 0.94);
-      border: 1.5px solid var(--disco-cyan);
-      border-radius: 50px;
-      padding: 6px 16px 6px 6px;
-      display: inline-flex;
+      top: 18px;
+      right: 18px;
+      z-index: 9999;
+      display: flex;
       align-items: center;
       gap: 10px;
+      background: rgba(14, 14, 22, 0.88);
+      border: 1.5px solid rgba(255, 0, 127, 0.5);
+      border-radius: 50px;
+      padding: 6px 14px 6px 6px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 0, 127, 0.35);
+      backdrop-filter: blur(10px);
       cursor: pointer;
-      box-shadow: 0 4px 22px rgba(0, 217, 255, 0.4), inset 0 0 12px rgba(0,0,0,0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .music-floating-ctrl:active {
-      transform: scale(0.93);
+      touch-action: manipulation;
     }
 
     .vinyl-disc {
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: 
-        conic-gradient(
-          from 0deg,
-          rgba(255, 255, 255, 0.26) 0deg,
-          transparent 45deg,
-          rgba(255, 255, 255, 0.26) 90deg,
-          transparent 135deg,
-          rgba(255, 255, 255, 0.26) 180deg,
-          transparent 225deg,
-          rgba(255, 255, 255, 0.26) 270deg,
-          transparent 315deg,
-          rgba(255, 255, 255, 0.26) 360deg
-        ),
-        repeating-radial-gradient(
-          circle at center,
-          #0b0d14 0px,
-          #0b0d14 1.5px,
-          #1a2236 2px,
-          #06080e 3px
-        );
+      background: radial-gradient(circle, #1a1a24 0%, #0d0d12 40%, #050508 100%);
+      border: 2px solid #2a2a38;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.9), inset 0 0 4px rgba(255, 255, 255, 0.2);
       position: relative;
       display: flex;
-      justify-content: center;
       align-items: center;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 217, 255, 0.4);
-      border: 1px solid #1e293b;
-      animation: spinVinylDisc 2.8s linear infinite;
-      animation-play-state: paused;
+      justify-content: center;
+      animation: spinVinylDisc 4s linear infinite paused;
     }
 
     .music-floating-ctrl.playing .vinyl-disc {
       animation-play-state: running;
     }
 
+    @keyframes spinVinylDisc {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .vinyl-center-label {
-      width: 14px;
-      height: 14px;
+      width: 17px;
+      height: 17px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--disco-cyan) 30%, var(--disco-blue-vivid) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      background: linear-gradient(135deg, var(--neon-fuchsia) 0%, var(--neon-violet) 100%);
+      border: 1px solid #ffffff;
       display: flex;
-      justify-content: center;
       align-items: center;
-      box-shadow: inset 0 0 3px rgba(0,0,0,0.8);
+      justify-content: center;
+      box-shadow: 0 0 5px rgba(255, 0, 127, 0.8);
     }
 
     .vinyl-spindle-hole {
-      width: 3.5px;
-      height: 3.5px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
-      background: #020510;
-      border: 0.8px solid #cbd5e1;
-    }
-
-    @keyframes spinVinylDisc {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      background: #030305;
+      border: 0.8px solid rgba(255, 255, 255, 0.7);
     }
 
     .music-label-tag {
-      font-size: 0.8rem;
-      font-weight: 800;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: #ffffff;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      text-shadow: 0 0 10px rgba(0, 217, 255, 0.8);
+      font-family: 'Cinzel', serif;
     }
 
     /* =======================================================
-       PANTALLA 1: PORTADA DISCO GLAM AZUL & VIOLETA
+       LAYOUT PRINCIPAL MOBILE-FIRST
        ======================================================= */
-    #screen-welcome {
+    .app-viewport {
+      position: relative;
+      z-index: 10;
       width: 100%;
-      background: var(--card-bg);
-      border-radius: 28px;
-      padding: 32px 20px 36px 20px;
-      text-align: center;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(37, 139, 255, 0.25), 0 0 45px rgba(22, 77, 255, 0.3);
-      border: 1.5px solid var(--card-border);
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 20px 14px 40px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    /* =======================================================
+       PANTALLA 1: PORTADA VIP DISCO PARTY
+       ======================================================= */
+    #screen-welcome {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 1;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
 
     #screen-welcome.fading-out {
@@ -292,32 +253,27 @@
       pointer-events: none;
     }
 
-    /* Corona Plateada Diamante con destello azulado */
+    /* Corona Plateada con destellos neón */
     .silver-crown-vector {
-      width: 52px;
+      width: 58px;
       height: auto;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 0 10px rgba(234, 247, 255, 0.9)) drop-shadow(0 0 22px rgba(0, 217, 255, 0.7));
-      animation: crownShine 3.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes crownShine {
-      0% { filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 15px rgba(0, 217, 255, 0.5)); }
-      100% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(37, 139, 255, 0.85)); }
+      margin-top: 15px;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 0 10px rgba(255, 0, 127, 0.6));
     }
 
     .heading-xv {
       font-family: 'Cinzel', serif;
-      font-size: 0.96rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      letter-spacing: 8px;
-      color: var(--white-ice);
+      letter-spacing: 4px;
+      color: var(--white-pure);
       text-transform: uppercase;
       margin-bottom: 2px;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.75), 0 0 25px rgba(37, 139, 255, 0.6);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.75);
     }
 
-    /* Nombre ANGELES en Bodoni Moda 900 con Degradado de Luz Azul-Cian-Violeta */
+    /* Nombre ANGELES con degradado Glamour Fucsia / Rosa / Plata */
     .heading-angeles {
       font-family: 'Bodoni Moda', 'Playfair Display', serif;
       font-size: 3.4rem;
@@ -327,10 +283,10 @@
       padding-top: 6px;
       padding-bottom: 4px;
       text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff 0%, #eaf7ff 22%, #5cebff 50%, #258bff 75%, #a855f7 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #ffcbe3 25%, #ff2a85 65%, #c2185b 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.85)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
+      filter: drop-shadow(0 0 20px rgba(255, 42, 133, 0.85)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
       margin-bottom: 4px;
       display: inline-block;
     }
@@ -341,10 +297,10 @@
       font-size: 0.84rem;
       font-weight: 800;
       letter-spacing: 3px;
-      color: var(--disco-cyan-bright);
+      color: #ff3399;
       text-transform: uppercase;
       margin-bottom: 14px;
-      text-shadow: 0 0 12px rgba(0, 217, 255, 0.75);
+      text-shadow: 0 0 12px rgba(255, 0, 127, 0.7);
     }
 
     /* ESCENARIO BOLA DISCO 3D (THREE.JS) */
@@ -358,7 +314,7 @@
       justify-content: center;
       align-items: center;
       cursor: grab;
-      touch-action: pan-y; /* Permite scroll vertical en móvil sin interferir */
+      touch-action: pan-y;
     }
 
     .disco-3d-stage:active {
@@ -368,88 +324,90 @@
     #disco-three-canvas {
       width: 100% !important;
       height: 100% !important;
+      outline: none;
       display: block;
-      pointer-events: auto;
     }
 
     .disco-drag-hint {
       position: absolute;
       bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.68rem;
-      color: rgba(234, 247, 255, 0.75);
+      font-size: 0.72rem;
+      color: var(--neon-pink-light);
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      pointer-events: none;
-      background: rgba(2, 5, 16, 0.65);
-      padding: 3px 14px;
+      background: rgba(14, 14, 22, 0.75);
+      border: 1px solid rgba(255, 0, 127, 0.4);
+      padding: 4px 12px;
       border-radius: 20px;
-      border: 1px solid rgba(0, 217, 255, 0.25);
-      backdrop-filter: blur(4px);
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
     }
 
-    /* CALENDARIO ELEGANTE EN AZUL MEDIANOCHE */
+    /* CALENDARIO DE OCTUBRE 2026 */
     .calendar-wrapper {
-      background: var(--card-inner-box);
-      border: 1px solid rgba(37, 139, 255, 0.25);
-      border-radius: 20px;
-      padding: 18px 16px;
       width: 100%;
-      margin-bottom: 22px;
-      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.6);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 20px 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 0, 127, 0.2);
     }
 
     .calendar-month-title {
       font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 800;
       color: #ffffff;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      letter-spacing: 4px;
+      margin-bottom: 14px;
+      text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
     }
 
     .calendar-grid-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.84rem;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .calendar-grid-table th {
-      color: #64748b;
-      font-weight: 600;
-      padding: 4px 0;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--neon-fuchsia);
+      padding-bottom: 10px;
+      letter-spacing: 1px;
     }
 
     .calendar-grid-table td {
-      padding: 6px 0;
-      color: #94a3b8;
-      font-weight: 500;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      padding: 7px 0;
+      text-align: center;
+      position: relative;
     }
 
+    /* DÍA 19 RESALTADO CON HALO BRILLANTE FUCSIA */
     .day-oct-19 {
       color: #ffffff !important;
-      font-weight: 800;
+      font-weight: 800 !important;
     }
 
     .day-oct-19-badge {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
       width: 32px;
       height: 32px;
-      background: linear-gradient(135deg, var(--disco-blue-vivid), var(--disco-cyan));
+      line-height: 32px;
+      margin: 0 auto;
       border-radius: 50%;
-      box-shadow: 0 0 16px var(--disco-cyan);
+      background: linear-gradient(135deg, var(--neon-fuchsia) 0%, var(--neon-violet) 100%);
+      box-shadow: 0 0 18px var(--neon-fuchsia);
       animation: pulseDayBadge 1.6s infinite alternate;
       border: 1.5px solid #ffffff;
     }
 
     @keyframes pulseDayBadge {
-      0% { transform: scale(0.95); box-shadow: 0 0 8px var(--disco-blue-vivid); }
-      100% { transform: scale(1.1); box-shadow: 0 0 22px var(--disco-cyan); }
+      0% { transform: scale(0.95); box-shadow: 0 0 8px var(--neon-fuchsia); }
+      100% { transform: scale(1.1); box-shadow: 0 0 22px var(--neon-pink); }
     }
 
     /* CONTEO REGRESIVO */
@@ -469,8 +427,8 @@
     }
 
     .time-box {
-      background: rgba(2, 5, 16, 0.95);
-      border: 1px solid rgba(0, 217, 255, 0.35);
+      background: rgba(5, 5, 10, 0.95);
+      border: 1px solid rgba(255, 0, 127, 0.35);
       border-radius: 14px;
       padding: 10px 4px;
       text-align: center;
@@ -483,7 +441,7 @@
       font-weight: 800;
       color: #ffffff;
       line-height: 1.1;
-      text-shadow: 0 0 12px rgba(0, 217, 255, 0.75);
+      text-shadow: 0 0 12px rgba(255, 0, 127, 0.75);
     }
 
     .time-box-lbl {
@@ -494,12 +452,12 @@
       letter-spacing: 0.5px;
     }
 
-    /* BOTÓN PRINCIPAL ABRIR INVITACIÓN (ÁREA TÁCTIL GRANDE Y CÓMODA) */
+    /* BOTÓN PRINCIPAL ABRIR INVITACIÓN */
     .btn-open-invitation {
       min-height: 54px;
       width: 100%;
       max-width: 320px;
-      background: linear-gradient(135deg, var(--disco-blue-vivid) 0%, var(--disco-violet-bright) 50%, var(--disco-cyan) 100%);
+      background: linear-gradient(135deg, var(--neon-fuchsia) 0%, var(--neon-violet) 50%, var(--electric-blue) 100%);
       background-size: 200% 200%;
       animation: pulseOpenBtn 2.4s infinite alternate;
       color: #ffffff;
@@ -511,7 +469,7 @@
       letter-spacing: 2.5px;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 8px 32px rgba(0, 217, 255, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 30px rgba(255, 0, 127, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.6);
       transition: transform 0.2s, box-shadow 0.2s;
       text-transform: uppercase;
       border: 1px solid rgba(255, 255, 255, 0.4);
@@ -523,8 +481,8 @@
     }
 
     @keyframes pulseOpenBtn {
-      0% { transform: scale(1); background-position: 0% 50%; box-shadow: 0 6px 25px rgba(22, 77, 255, 0.5); }
-      100% { transform: scale(1.03); background-position: 100% 50%; box-shadow: 0 10px 35px rgba(0, 217, 255, 0.65); }
+      0% { transform: scale(1); background-position: 0% 50%; box-shadow: 0 6px 25px rgba(255, 0, 127, 0.5); }
+      100% { transform: scale(1.03); background-position: 100% 50%; box-shadow: 0 10px 35px rgba(255, 42, 133, 0.75); }
     }
 
     /* =======================================================
@@ -536,7 +494,7 @@
       background: var(--card-bg);
       border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(37, 139, 255, 0.25), 0 0 45px rgba(22, 77, 255, 0.3);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 0, 127, 0.3), 0 0 45px rgba(255, 0, 127, 0.25);
       border: 1.5px solid var(--card-border);
       position: relative;
       opacity: 0;
@@ -555,7 +513,7 @@
       left: 0;
       width: 100%;
       height: 6px;
-      background: linear-gradient(90deg, var(--disco-cyan), var(--disco-blue-vivid), var(--disco-violet-bright), var(--disco-magenta), var(--disco-cyan));
+      background: linear-gradient(90deg, var(--neon-fuchsia), var(--neon-violet), var(--electric-blue), var(--neon-pink), var(--neon-fuchsia));
       background-size: 200% 100%;
       animation: moveLaserBar 4s linear infinite;
     }
@@ -576,7 +534,7 @@
     /* SECCIÓN DE PADRES Y DEDICATORIA EDITORIAL */
     .editorial-parents-card {
       background: var(--card-inner-box);
-      border: 1px solid rgba(37, 139, 255, 0.25);
+      border: 1px solid rgba(255, 0, 127, 0.28);
       border-radius: 20px;
       padding: 22px 18px;
       width: 100%;
@@ -589,7 +547,7 @@
       font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 2px;
-      color: var(--disco-cyan-bright);
+      color: var(--neon-pink-light);
       text-transform: uppercase;
       margin-bottom: 12px;
     }
@@ -613,7 +571,7 @@
     }
 
     .godparents-sub-box {
-      border-top: 1px dashed rgba(37, 139, 255, 0.25);
+      border-top: 1px dashed rgba(255, 0, 127, 0.25);
       padding-top: 14px;
       margin-top: 10px;
     }
@@ -623,7 +581,7 @@
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 2px;
-      color: var(--disco-violet-bright);
+      color: var(--neon-violet);
       text-transform: uppercase;
       margin-bottom: 6px;
     }
@@ -646,7 +604,7 @@
 
     .coord-card-item {
       background: var(--card-inner-box);
-      border: 1px solid rgba(37, 139, 255, 0.25);
+      border: 1px solid rgba(255, 0, 127, 0.25);
       border-radius: 16px;
       padding: 14px 16px;
       display: flex;
@@ -660,11 +618,12 @@
       height: 46px;
       min-width: 46px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(22, 77, 255, 0.3), rgba(0, 217, 255, 0.2));
-      border: 1.5px solid var(--disco-cyan);
+      background: linear-gradient(135deg, rgba(255, 0, 127, 0.3), rgba(157, 78, 221, 0.2));
+      border: 1.5px solid var(--neon-fuchsia);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.35);
     }
 
     .coord-data-block {
@@ -677,7 +636,7 @@
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 1.5px;
-      color: var(--disco-cyan);
+      color: var(--neon-pink-light);
       text-transform: uppercase;
     }
 
@@ -717,7 +676,7 @@
     /* PROTOCOLO VIP Y REGLAS */
     .vip-protocol-card {
       background: var(--card-inner-box);
-      border: 1px solid rgba(37, 139, 255, 0.25);
+      border: 1px solid rgba(255, 0, 127, 0.28);
       border-radius: 20px;
       padding: 22px 18px;
       width: 100%;
@@ -729,8 +688,8 @@
     }
 
     .vip-access-pill {
-      background: rgba(0, 217, 255, 0.15);
-      border: 1.5px solid var(--disco-cyan);
+      background: rgba(255, 0, 127, 0.15);
+      border: 1.5px solid var(--neon-fuchsia);
       color: #ffffff;
       font-family: 'Cinzel', serif;
       font-size: 0.9rem;
@@ -741,12 +700,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 0 16px rgba(0, 217, 255, 0.35);
+      box-shadow: 0 0 16px rgba(255, 0, 127, 0.35);
     }
 
     /* RESTRICCIÓN DE EDAD (JÓVENES Y ADULTOS) */
     .adults-only-badge {
-      background: rgba(2, 5, 16, 0.9);
+      background: rgba(5, 5, 12, 0.9);
       border-left: 3px solid var(--gold-accent);
       border-radius: 12px;
       padding: 12px 14px;
@@ -776,9 +735,8 @@
     .dress-code-box {
       width: 100%;
       text-align: center;
-      border-top: 1px dashed rgba(37, 139, 255, 0.25);
-      border-bottom: 1px dashed rgba(37, 139, 255, 0.25);
-      padding: 14px 0;
+      border-top: 1px dashed rgba(255, 0, 127, 0.25);
+      padding-top: 14px;
     }
 
     .dress-code-lbl {
@@ -786,7 +744,7 @@
       font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 3px;
-      color: var(--disco-cyan);
+      color: var(--neon-pink-light);
       text-transform: uppercase;
     }
 
@@ -829,21 +787,21 @@
 
     .reserved-colors-footer {
       font-size: 0.72rem;
-      color: #64748b;
+      color: #94a3b8;
       font-style: italic;
     }
 
     /* =======================================================
-       SECCIÓN AMBIENTE & DJ ANIMADO (PRODUCCIÓN PREMIUM)
+       SECCIÓN AMBIENTE & DJ ANIMADO (GLAMOUR EDITION)
        ======================================================= */
     .ambiente-disco-card {
       background: var(--card-inner-box);
-      border: 1.5px solid rgba(0, 217, 255, 0.4);
+      border: 1.5px solid rgba(255, 0, 127, 0.45);
       border-radius: 22px;
       padding: 24px 18px;
       width: 100%;
       margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(22, 77, 255, 0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 0, 127, 0.25);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -855,24 +813,25 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(0, 217, 255, 0.12);
-      border: 1px solid var(--disco-cyan);
+      background: rgba(255, 0, 127, 0.15);
+      border: 1px solid var(--neon-fuchsia);
       padding: 4px 14px;
       border-radius: 50px;
       font-size: 0.72rem;
       font-weight: 800;
-      color: var(--disco-cyan-bright);
+      color: #ffffff;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 12px;
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
     }
 
     .live-dot-pulse {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #00d9ff;
-      box-shadow: 0 0 8px #00d9ff;
+      background: #ff007f;
+      box-shadow: 0 0 8px #ff007f;
       animation: liveDotBlink 1.2s infinite ease-in-out;
     }
 
@@ -895,9 +854,9 @@
       font-family: 'Cinzel', serif;
       font-size: 1.15rem;
       font-weight: 900;
-      color: var(--disco-cyan);
+      color: var(--neon-fuchsia);
       letter-spacing: 2px;
-      text-shadow: 0 0 14px rgba(0, 217, 255, 0.7);
+      text-shadow: 0 0 14px rgba(255, 0, 127, 0.7);
       margin-bottom: 6px;
     }
 
@@ -914,12 +873,12 @@
     .dj-setup-container {
       width: 100%;
       max-width: 320px;
-      background: rgba(2, 5, 16, 0.95);
-      border: 1px solid rgba(37, 139, 255, 0.35);
+      background: rgba(8, 5, 14, 0.95);
+      border: 1px solid rgba(255, 0, 127, 0.35);
       border-radius: 18px;
       padding: 16px 14px;
       margin-bottom: 16px;
-      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 4px 15px rgba(0, 217, 255, 0.15);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 4px 15px rgba(255, 0, 127, 0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -937,9 +896,9 @@
       width: 58px;
       height: 58px;
       border-radius: 50%;
-      background: radial-gradient(circle, #0a0e1a 0%, #1a233a 50%, #050a18 100%);
-      border: 2px solid rgba(0, 217, 255, 0.5);
-      box-shadow: 0 0 12px rgba(22, 77, 255, 0.4);
+      background: radial-gradient(circle, #1a1020 0%, #251030 50%, #0d0612 100%);
+      border: 2px solid rgba(255, 0, 127, 0.5);
+      box-shadow: 0 0 12px rgba(255, 0, 127, 0.4);
       position: relative;
       display: flex;
       align-items: center;
@@ -960,9 +919,9 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--disco-cyan) 0%, var(--disco-blue-vivid) 100%);
+      background: linear-gradient(135deg, var(--neon-fuchsia) 0%, var(--neon-violet) 100%);
       border: 1.5px solid #ffffff;
-      box-shadow: 0 0 6px var(--disco-cyan);
+      box-shadow: 0 0 6px var(--neon-fuchsia);
     }
 
     .dj-mixer-center {
@@ -983,7 +942,7 @@
     .dj-fader-knob {
       width: 10px;
       height: 12px;
-      background: var(--disco-cyan);
+      background: var(--neon-fuchsia);
       border-radius: 2px;
       position: absolute;
       top: -3px;
@@ -996,7 +955,7 @@
       100% { left: 20px; }
     }
 
-    /* ECUALIZADOR ANIMADO LED */
+    /* ECUALIZADOR ANIMADO LED NEÓN */
     .equalizer-spectrum-bar {
       display: flex;
       align-items: flex-end;
@@ -1010,9 +969,9 @@
     .eq-column {
       flex: 1;
       max-width: 10px;
-      background: linear-gradient(180deg, var(--disco-pink-neon) 0%, var(--disco-violet-bright) 35%, var(--disco-cyan) 75%, var(--disco-blue-vivid) 100%);
+      background: linear-gradient(180deg, #ffffff 0%, var(--neon-pink) 30%, var(--neon-fuchsia) 60%, var(--neon-violet) 100%);
       border-radius: 3px 3px 1px 1px;
-      box-shadow: 0 0 6px rgba(0, 217, 255, 0.4);
+      box-shadow: 0 0 6px rgba(255, 0, 127, 0.45);
       transform-origin: bottom;
       animation: eqBounce 1.2s ease-in-out infinite alternate;
     }
@@ -1032,16 +991,16 @@
 
     @keyframes eqBounce {
       0% { transform: scaleY(0.25); filter: brightness(0.85); }
-      50% { transform: scaleY(0.95); filter: brightness(1.2); }
+      50% { transform: scaleY(0.95); filter: brightness(1.25); }
       100% { transform: scaleY(0.4); filter: brightness(1.0); }
     }
 
     .ambiente-host-note {
       font-size: 0.82rem;
-      color: var(--disco-cyan-bright);
+      color: var(--neon-pink-light);
       line-height: 1.45;
-      background: rgba(22, 77, 255, 0.15);
-      border: 1px dashed rgba(0, 217, 255, 0.35);
+      background: rgba(255, 0, 127, 0.12);
+      border: 1px dashed rgba(255, 0, 127, 0.35);
       border-radius: 12px;
       padding: 10px 14px;
       width: 100%;
@@ -1052,7 +1011,7 @@
        ======================================================= */
     .regalitos-card {
       background: var(--card-inner-box);
-      border: 1px solid rgba(37, 139, 255, 0.3);
+      border: 1px solid rgba(255, 0, 127, 0.3);
       border-radius: 20px;
       padding: 22px 18px;
       width: 100%;
@@ -1068,13 +1027,13 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(22, 77, 255, 0.3), rgba(0, 217, 255, 0.2));
-      border: 1.5px solid var(--disco-cyan);
+      background: linear-gradient(135deg, rgba(255, 0, 127, 0.3), rgba(157, 78, 221, 0.2));
+      border: 1.5px solid var(--neon-fuchsia);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 12px;
-      box-shadow: 0 0 16px rgba(0, 217, 255, 0.35);
+      box-shadow: 0 0 16px rgba(255, 0, 127, 0.35);
     }
 
     .regalitos-title {
@@ -1091,7 +1050,7 @@
       font-family: 'Cinzel', serif;
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--disco-cyan);
+      color: var(--neon-fuchsia);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 10px;
@@ -1104,83 +1063,10 @@
       font-style: italic;
     }
 
-    /* FORMULARIO DE CONFIRMACIÓN VIP (WHATSAPP BUSINESS) */
-    .rsvp-vip-section {
-      background: var(--card-inner-box);
-      border: 1.5px solid var(--disco-cyan);
-      border-radius: 22px;
-      padding: 24px 18px;
-      width: 100%;
-      margin-bottom: 14px;
-      box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
-    }
-
-    .rsvp-sec-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .rsvp-sec-limit {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--gold-accent);
-      margin-bottom: 18px;
-    }
-
-    .input-field-custom {
-      width: 100%;
-      min-height: 48px;
-      background: rgba(2, 5, 16, 0.9);
-      border: 1px solid rgba(37, 139, 255, 0.35);
-      border-radius: 12px;
-      padding: 12px 16px;
-      color: #ffffff;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px; /* Evita auto-zoom en iOS Safari */
-      outline: none;
-      margin-bottom: 12px;
-      transition: border 0.2s, box-shadow 0.2s;
-    }
-
-    .input-field-custom:focus {
-      border-color: var(--disco-cyan);
-      box-shadow: 0 0 12px rgba(0, 217, 255, 0.5);
-    }
-
-    .btn-wp-confirm {
-      min-height: 52px;
-      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-      color: #ffffff;
-      border: none;
-      padding: 16px;
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      border-radius: 50px;
-      cursor: pointer;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45);
-      transition: transform 0.2s;
-      text-transform: uppercase;
-    }
-
-    .btn-wp-confirm:active {
-      transform: scale(0.96);
-    }
-
-    /* PLAYLIST INTERACTIVA VIP (MÁXIMO 2 TEMAS POR INVITADO) */
+    /* PLAYLIST INTERACTIVA VIP */
     .playlist-vip-section {
       background: var(--card-inner-box);
-      border: 1px solid rgba(37, 139, 255, 0.25);
+      border: 1px solid rgba(255, 0, 127, 0.28);
       border-radius: 22px;
       padding: 24px 18px;
       width: 100%;
@@ -1215,8 +1101,8 @@
 
     .btn-elegir-tema {
       min-height: 48px;
-      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
-      color: #020510;
+      background: linear-gradient(180deg, #ffffff 0%, #ffcbe3 40%, #ff2a85 100%);
+      color: #030305;
       border: 1px solid #ffffff;
       padding: 14px;
       font-family: 'Montserrat', sans-serif;
@@ -1229,7 +1115,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 18px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 18px rgba(255, 0, 127, 0.4);
       transition: transform 0.2s;
     }
 
@@ -1246,8 +1132,8 @@
     }
 
     .song-item-pill {
-      background: rgba(2, 5, 16, 0.95);
-      border: 1px solid rgba(0, 217, 255, 0.4);
+      background: rgba(5, 5, 10, 0.95);
+      border: 1px solid rgba(255, 0, 127, 0.4);
       border-radius: 12px;
       padding: 10px 14px;
       display: flex;
@@ -1274,7 +1160,7 @@
 
     .song-artist-str {
       font-size: 0.78rem;
-      color: var(--disco-cyan-bright);
+      color: var(--neon-pink-light);
     }
 
     .song-badge-status {
@@ -1305,13 +1191,86 @@
       width: 100%;
     }
 
+    /* FORMULARIO DE CONFIRMACIÓN VIP */
+    .rsvp-vip-section {
+      background: var(--card-inner-box);
+      border: 1.5px solid var(--neon-fuchsia);
+      border-radius: 22px;
+      padding: 24px 18px;
+      width: 100%;
+      margin-bottom: 14px;
+      box-shadow: 0 0 30px rgba(255, 0, 127, 0.25);
+    }
+
+    .rsvp-sec-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .rsvp-sec-limit {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-accent);
+      margin-bottom: 18px;
+    }
+
+    .input-field-custom {
+      width: 100%;
+      min-height: 48px;
+      background: rgba(5, 5, 12, 0.9);
+      border: 1px solid rgba(255, 0, 127, 0.35);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .input-field-custom:focus {
+      border-color: var(--neon-fuchsia);
+      box-shadow: 0 0 12px rgba(255, 0, 127, 0.5);
+    }
+
+    .btn-wp-confirm {
+      min-height: 52px;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #ffffff;
+      border: none;
+      padding: 16px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45);
+      transition: transform 0.2s;
+      text-transform: uppercase;
+    }
+
+    .btn-wp-confirm:active {
+      transform: scale(0.96);
+    }
+
     /* TOAST DE SISTEMA */
     .toast-system-alert {
       position: fixed;
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: rgba(220, 38, 38, 0.95);
+      background: rgba(225, 29, 72, 0.95);
       color: #ffffff;
       padding: 14px 22px;
       border-radius: 50px;
@@ -1339,7 +1298,6 @@
       text-transform: uppercase;
     }
 
-    /* REDUCED MOTION SUPPORT */
     @media (prefers-reduced-motion: reduce) {
       *, ::before, ::after {
         animation-duration: 0.01ms !important;
@@ -1351,7 +1309,7 @@
 </head>
 <body>
 
-  <!-- Elemento de audio con fallback en formatos compatibles -->
+  <!-- Elemento de audio -->
   <audio id="bg-audio" loop preload="auto">
     <source src="musica.m4a" type="audio/mp4">
     <source src="musica.mp4" type="audio/mp4">
@@ -1367,17 +1325,17 @@
     <span class="music-label-tag">Música</span>
   </div>
 
-  <!-- FONDO DISCO AMBIENTAL EN AZUL NOCTURNO -->
+  <!-- FONDO DISCO AMBIENTAL GLAMOUR -->
   <div id="ambient-bg"></div>
 
-  <!-- RAYOS VOLUMÉTRICOS DE LUZ AZUL Y CIAN -->
+  <!-- RAYOS VOLUMÉTRICOS DE LUZ FUCSIA Y BLANCO -->
   <div class="volumetric-rays">
     <div class="v-ray v-ray-1"></div>
     <div class="v-ray v-ray-2"></div>
     <div class="v-ray v-ray-3"></div>
   </div>
 
-  <!-- LIENZO GLOBAL DE PARTÍCULAS / CASCADA DE LUCES DISCO -->
+  <!-- LIENZO GLOBAL DE PARTÍCULAS DISCO -->
   <canvas id="particles-canvas"></canvas>
 
   <!-- FLASH CINEMATOGRÁFICO DE TRANSICIÓN -->
@@ -1394,15 +1352,15 @@
       <!-- Corona Plateada Vectorial con destello -->
       <svg class="silver-crown-vector" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 52 L22 24 L42 38 L50 14 L58 38 L78 24 L88 52 Z" fill="url(#crown-metal-grad)" stroke="#ffffff" stroke-width="1.8"/>
-        <circle cx="50" cy="11" r="5" fill="#ffffff" filter="drop-shadow(0 0 6px #00d9ff)"/>
-        <circle cx="22" cy="21" r="4" fill="#ffffff" filter="drop-shadow(0 0 4px #00d9ff)"/>
-        <circle cx="78" cy="21" r="4" fill="#ffffff" filter="drop-shadow(0 0 4px #00d9ff)"/>
-        <circle cx="50" cy="33" r="3" fill="#00d9ff"/>
+        <circle cx="50" cy="11" r="5" fill="#ffffff" filter="drop-shadow(0 0 6px #ff007f)"/>
+        <circle cx="22" cy="21" r="4" fill="#ffffff" filter="drop-shadow(0 0 4px #ff007f)"/>
+        <circle cx="78" cy="21" r="4" fill="#ffffff" filter="drop-shadow(0 0 4px #ff007f)"/>
+        <circle cx="50" cy="33" r="3" fill="#ff007f"/>
         <rect x="14" y="52" width="72" height="6" rx="3" fill="url(#crown-metal-grad)" stroke="#ffffff" stroke-width="1.5"/>
         <defs>
           <linearGradient id="crown-metal-grad" x1="0" y1="0" x2="100" y2="65" gradientUnits="userSpaceOnUse">
             <stop stop-color="#ffffff"/>
-            <stop offset="0.5" stop-color="#eaf7ff"/>
+            <stop offset="0.5" stop-color="#ffcbe3"/>
             <stop offset="1" stop-color="#94a3b8"/>
           </linearGradient>
         </defs>
@@ -1494,12 +1452,12 @@
           <circle cx="50" cy="11" r="5" fill="#ffffff"/>
           <circle cx="22" cy="21" r="4" fill="#ffffff"/>
           <circle cx="78" cy="21" r="4" fill="#ffffff"/>
-          <circle cx="50" cy="33" r="3" fill="#00d9ff"/>
+          <circle cx="50" cy="33" r="3" fill="#ff007f"/>
           <rect x="14" y="52" width="72" height="6" rx="3" fill="url(#crown-metal-grad2)" stroke="#ffffff" stroke-width="1.5"/>
           <defs>
             <linearGradient id="crown-metal-grad2" x1="0" y1="0" x2="100" y2="65" gradientUnits="userSpaceOnUse">
               <stop stop-color="#ffffff"/>
-              <stop offset="0.5" stop-color="#eaf7ff"/>
+              <stop offset="0.5" stop-color="#ffcbe3"/>
               <stop offset="1" stop-color="#94a3b8"/>
             </linearGradient>
           </defs>
@@ -1511,8 +1469,8 @@
 
         <!-- DEDICATORIA: PADRES Y PADRINOS -->
         <div class="editorial-parents-card">
-          <div class="parents-intro-tag">Hoy gracias a Dios y a mis padres</div>
-          <div class="parents-couple-names">Jahaira Lara Mondragón<br>&<br>Hermis Ramos</div>
+          <div class="parents-intro-tag">Doy gracias a Dios y a mis padres</div>
+          <div class="parents-couple-names">Jahaira Lara Mondragón<br>&<br>Hermis Ramos Monja</div>
           <p class="dedication-poetic-quote">
             "Por regalarme la vida, el amor y la oportunidad de celebrar este sueño."
           </p>
@@ -1528,7 +1486,7 @@
         <div class="event-coords-list">
           <div class="coord-card-item">
             <div class="coord-icon-orb">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
                 <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -1543,7 +1501,7 @@
 
           <div class="coord-card-item">
             <div class="coord-icon-orb">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
@@ -1556,7 +1514,7 @@
 
           <div class="coord-card-item">
             <div class="coord-icon-orb">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
@@ -1612,10 +1570,9 @@
               (Fucsia, Rosado y Plateado en ninguna de sus tonalidades)
             </div>
           </div>
-
         </div>
 
-        <!-- SECCIÓN AMBIENTE & DJ ANIMADO -->
+        <!-- SECCIÓN AMBIENTE & DJ ANIMADO (GLAMOUR EDITION) -->
         <div class="ambiente-disco-card">
           <div class="ambiente-live-badge">
             <span class="live-dot-pulse"></span>
@@ -1632,7 +1589,7 @@
                 <div class="dj-turntable-core"></div>
               </div>
               <div class="dj-mixer-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2">
                   <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
                   <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
                 </svg>
@@ -1645,7 +1602,7 @@
               </div>
             </div>
 
-            <!-- ECUALIZADOR ANIMADO DE AUDIO -->
+            <!-- ECUALIZADOR ANIMADO DE AUDIO NEÓN -->
             <div class="equalizer-spectrum-bar">
               <div class="eq-column eq-col-1"></div>
               <div class="eq-column eq-col-2"></div>
@@ -1670,7 +1627,7 @@
         <!-- SECCIÓN REGALITOS -->
         <div class="regalitos-card">
           <div class="regalitos-icon-halo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path>
               <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path>
               <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"></path>
@@ -1789,7 +1746,6 @@
       toggleMusicPlayback();
     });
 
-    // Desbloqueo pasivo en el primer gesto del usuario
     function onFirstTouchGesture() {
       if (!isMusicPlaying) playDiscoAudio();
       document.removeEventListener("touchstart", onFirstTouchGesture);
@@ -1799,13 +1755,13 @@
     document.addEventListener("click", onFirstTouchGesture, { passive: true });
 
     // =======================================================
-    // BOLA DISCO 3D REAL CON THREE.JS (PALETA AZUL / CIAN / VIOLETA)
+    // BOLA DISCO 3D REAL CON THREE.JS (PALETA GLAMOUR FUCSIA / MAGENTA / VIOLETA / CIAN)
     // =======================================================
     let discoSphereRef = null;
     let discoSpotsRef = null;
-    let discoBlueLightRef = null;
+    let discoPinkLightRef = null;
     let discoCyanLightRef = null;
-    let discoVioletLightRef = null;
+    let discoWhiteLightRef = null;
     let ballSpeedMultiplier = 1.0;
 
     function initDisco3D() {
@@ -1827,165 +1783,92 @@
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.35;
 
-      // Iluminación ambiental en azul profundo
-      const ambLight = new THREE.AmbientLight(0x0a1845, 1.8);
+      // Iluminación ambiental nocturna en tono violeta oscuro
+      const ambLight = new THREE.AmbientLight(0x12061c, 1.8);
       scene.add(ambLight);
 
-      // Foco principal Azul Eléctrico
-      const blueLight = new THREE.PointLight(0x164dff, 6.2, 24);
-      blueLight.position.set(4, 3, 4);
-      scene.add(blueLight);
-      discoBlueLightRef = blueLight;
+      // Foco principal Fucsia / Rosa Neón
+      const pinkLight = new THREE.PointLight(0xff007f, 6.5, 24);
+      pinkLight.position.set(4, 3, 4);
+      scene.add(pinkLight);
+      discoPinkLightRef = pinkLight;
 
       // Foco Cian Eléctrico
-      const cyanLight = new THREE.PointLight(0x00d9ff, 5.5, 24);
+      const cyanLight = new THREE.PointLight(0x00e5ff, 5.5, 24);
       cyanLight.position.set(-4, -2, 3);
       scene.add(cyanLight);
       discoCyanLightRef = cyanLight;
 
-      // Foco Violeta / Magenta de acento
-      const violetLight = new THREE.PointLight(0xd21fff, 4.8, 20);
-      violetLight.position.set(0, -4, 2);
-      scene.add(violetLight);
-      discoVioletLightRef = violetLight;
-
-      // Foco Blanco Hielo superior
-      const whiteLight = new THREE.DirectionalLight(0xeaf7ff, 4.2);
+      // Luz Blanca Cenital
+      const whiteLight = new THREE.DirectionalLight(0xffffff, 4.2);
       whiteLight.position.set(0, 6, 6);
       scene.add(whiteLight);
+      discoWhiteLightRef = whiteLight;
 
       const ballAssembly = new THREE.Group();
       scene.add(ballAssembly);
 
-      // Cable de suspensión metálico
+      // Cable de suspensión
       const cableGeo = new THREE.CylinderGeometry(0.018, 0.018, 4.2, 8);
-      const cableMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.95, roughness: 0.15 });
+      const cableMat = new THREE.MeshStandardMaterial({ color: 0xcbd5e1, metalness: 0.95, roughness: 0.15 });
       const cable = new THREE.Mesh(cableGeo, cableMat);
-      cable.position.y = 3.7;
+      cable.position.y = 3.6;
       ballAssembly.add(cable);
 
-      // Aro y tapa de sujeción cromada
-      const ringGeo = new THREE.TorusGeometry(0.12, 0.03, 8, 24);
-      const ringMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.95, roughness: 0.1 });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI / 2;
-      ring.position.y = 1.68;
-      ballAssembly.add(ring);
-
-      const capGeo = new THREE.CylinderGeometry(0.24, 0.28, 0.18, 16);
-      const cap = new THREE.Mesh(capGeo, ringMat);
-      cap.position.y = 1.58;
+      // Tapa de montaje superior
+      const capGeo = new THREE.CylinderGeometry(0.35, 0.45, 0.22, 16);
+      const capMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.98, roughness: 0.1 });
+      const cap = new THREE.Mesh(capGeo, capMat);
+      cap.position.y = 1.6;
       ballAssembly.add(cap);
 
-      // Textura procedural de facetas de cristal con reflejos azul/cian/violeta/plata
-      function buildMirrorTexture() {
-        const c = document.createElement('canvas');
-        c.width = 1024; c.height = 512;
-        const ctx = c.getContext('2d');
-        const cols = 64, rows = 32;
-        const cellW = c.width / cols, cellH = c.height / rows;
-
-        ctx.fillStyle = '#050a18';
-        ctx.fillRect(0, 0, c.width, c.height);
-
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const rand = Math.random();
-            let baseG = Math.floor(215 + rand * 40);
-            let r = baseG, g = baseG, b = baseG;
-
-            if (rand > 0.82) {
-              r = 92; g = 235; b = 255; // Reflejo Cian Eléctrico
-            } else if (rand > 0.68) {
-              r = 37; g = 139; b = 255; // Reflejo Azul Brillante
-            } else if (rand > 0.55) {
-              r = 210; g = 31; b = 255; // Reflejo Violeta/Magenta
-            }
-
-            ctx.fillStyle = `rgb(${r},${g},${b})`;
-            ctx.fillRect(x * cellW + 1, y * cellH + 1, cellW - 2, cellH - 2);
-
-            ctx.strokeStyle = '#020510';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(x * cellW, y * cellH, cellW, cellH);
-          }
-        }
-
-        const tex = new THREE.CanvasTexture(c);
-        tex.wrapS = THREE.RepeatWrapping;
-        tex.wrapT = THREE.ClampToEdgeWrapping;
-        return tex;
-      }
-
-      function buildNormalTexture() {
-        const c = document.createElement('canvas');
-        c.width = 1024; c.height = 512;
-        const ctx = c.getContext('2d');
-        const cols = 64, rows = 32;
-        const cellW = c.width / cols, cellH = c.height / rows;
-
-        ctx.fillStyle = 'rgb(128,128,255)';
-        ctx.fillRect(0, 0, c.width, c.height);
-
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const tiltX = Math.floor(128 + (Math.random() - 0.5) * 50);
-            const tiltY = Math.floor(128 + (Math.random() - 0.5) * 50);
-            ctx.fillStyle = `rgb(${tiltX},${tiltY},255)`;
-            ctx.fillRect(x * cellW + 1.5, y * cellH + 1.5, cellW - 3, cellH - 3);
-          }
-        }
-        return new THREE.CanvasTexture(c);
-      }
-
-      const sphereGeo = new THREE.SphereGeometry(1.5, 48, 32);
-      const sphereMat = new THREE.MeshStandardMaterial({
-        map: buildMirrorTexture(),
-        normalMap: buildNormalTexture(),
+      // Generar Esfera de Espejos Facetada (2,400 facetas reflectivas)
+      const sphereGeo = new THREE.SphereGeometry(1.65, 60, 40);
+      const mirrorMat = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
         metalness: 0.98,
-        roughness: 0.08,
+        roughness: 0.12,
         flatShading: true,
-        envMapIntensity: 2.5
+        envMapIntensity: 1.5
       });
-
-      const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+      const sphereMesh = new THREE.Mesh(sphereGeo, mirrorMat);
       ballAssembly.add(sphereMesh);
       discoSphereRef = sphereMesh;
 
-      // Reflejos danzantes proyectados (Azul, Cian, Violeta, Blanco)
-      const spotsCount = 200;
+      // Proyección de destellos y chispas de luz alrededor
+      const spotCount = 180;
       const spotsGeo = new THREE.BufferGeometry();
-      const spotsPos = new Float32Array(spotsCount * 3);
-      const spotsCols = new Float32Array(spotsCount * 3);
+      const posArr = new Float32Array(spotCount * 3);
+      const colArr = new Float32Array(spotCount * 3);
 
-      const palette = [
-        new THREE.Color(0xffffff),
-        new THREE.Color(0x00d9ff),
-        new THREE.Color(0x5cebff),
-        new THREE.Color(0x164dff),
-        new THREE.Color(0x258bff),
-        new THREE.Color(0x7a2cff),
-        new THREE.Color(0xd21fff),
-        new THREE.Color(0xeaf7ff)
+      const colorPalette = [
+        new THREE.Color(0xff007f), // Fucsia
+        new THREE.Color(0xff3399), // Rosa
+        new THREE.Color(0x9d4edd), // Violeta
+        new THREE.Color(0x00d4ff), // Cian
+        new THREE.Color(0xffffff)  // Blanco
       ];
 
-      for (let i = 0; i < spotsCount; i++) {
-        const radius = 2.3 + Math.random() * 2.4;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = (Math.random() - 0.5) * Math.PI * 0.95;
+      for (let i = 0; i < spotCount; i++) {
+        const u = Math.random();
+        const v = Math.random();
+        const theta = u * 2.0 * Math.PI;
+        const phi = Math.acos(2.0 * v - 1.0);
+        const r = 2.1 + Math.random() * 2.5;
 
-        spotsPos[i * 3] = radius * Math.cos(phi) * Math.cos(theta);
-        spotsPos[i * 3 + 1] = radius * Math.sin(phi);
-        spotsPos[i * 3 + 2] = radius * Math.cos(phi) * Math.sin(theta);
+        const sinPhi = Math.sin(phi);
+        posArr[i * 3]     = r * sinPhi * Math.cos(theta);
+        posArr[i * 3 + 1] = r * sinPhi * Math.sin(theta);
+        posArr[i * 3 + 2] = r * Math.cos(phi);
 
-        const col = palette[Math.floor(Math.random() * palette.length)];
-        spotsCols[i * 3] = col.r;
-        spotsCols[i * 3 + 1] = col.g;
-        spotsCols[i * 3 + 2] = col.b;
+        const c = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+        colArr[i * 3]     = c.r;
+        colArr[i * 3 + 1] = c.g;
+        colArr[i * 3 + 2] = c.b;
       }
 
-      spotsGeo.setAttribute('position', new THREE.BufferAttribute(spotsPos, 3));
-      spotsGeo.setAttribute('color', new THREE.BufferAttribute(spotsCols, 3));
+      spotsGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+      spotsGeo.setAttribute('color', new THREE.BufferAttribute(colArr, 3));
 
       function createSpotTexture() {
         const c = document.createElement('canvas');
@@ -1993,8 +1876,8 @@
         const cx = c.getContext('2d');
         const grad = cx.createRadialGradient(32, 32, 0, 32, 32, 32);
         grad.addColorStop(0, 'rgba(255,255,255,1)');
-        grad.addColorStop(0.3, 'rgba(234,247,255,0.9)');
-        grad.addColorStop(0.6, 'rgba(0,217,255,0.45)');
+        grad.addColorStop(0.3, 'rgba(255,200,230,0.9)');
+        grad.addColorStop(0.6, 'rgba(255,0,127,0.45)');
         grad.addColorStop(1, 'rgba(0,0,0,0)');
         cx.fillStyle = grad;
         cx.fillRect(0, 0, 64, 64);
@@ -2014,16 +1897,16 @@
       scene.add(spotsMesh);
       discoSpotsRef = spotsMesh;
 
-      // Resplandor halo central en azul profundo y cian
+      // Resplandor halo central en Fucsia y Violeta
       const glowGeo = new THREE.PlaneGeometry(5.4, 5.4);
       function createBackGlowTex() {
         const c = document.createElement('canvas');
         c.width = 256; c.height = 256;
         const ctx = c.getContext('2d');
         const grad = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-        grad.addColorStop(0, 'rgba(0, 217, 255, 0.45)');
-        grad.addColorStop(0.4, 'rgba(22, 77, 255, 0.3)');
-        grad.addColorStop(0.8, 'rgba(122, 44, 255, 0.15)');
+        grad.addColorStop(0, 'rgba(255, 0, 127, 0.45)');
+        grad.addColorStop(0.4, 'rgba(157, 78, 221, 0.3)');
+        grad.addColorStop(0.8, 'rgba(0, 212, 255, 0.15)');
         grad.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, 256, 256);
@@ -2086,8 +1969,8 @@
         ballAssembly.rotation.y = Math.sin(elapsed * 0.8) * 0.04;
         ballAssembly.rotation.z = Math.sin(elapsed * 0.6) * 0.02;
 
-        blueLight.position.x = Math.cos(elapsed * 1.3) * 4.6;
-        blueLight.position.z = Math.sin(elapsed * 1.3) * 4.6;
+        pinkLight.position.x = Math.cos(elapsed * 1.3) * 4.6;
+        pinkLight.position.z = Math.sin(elapsed * 1.3) * 4.6;
 
         cyanLight.position.x = Math.cos(elapsed * 1.0 + Math.PI) * 4.6;
         cyanLight.position.z = Math.sin(elapsed * 1.0 + Math.PI) * 4.6;
@@ -2112,7 +1995,7 @@
     window.addEventListener('DOMContentLoaded', initDisco3D);
 
     // =======================================================
-    // MOTOR DE PARTÍCULAS CANVAS (PALETA DISCO AZUL-CIAN-VIOLETA)
+    // MOTOR DE PARTÍCULAS CANVAS (PALETA GLAMOUR FUCSIA / MAGENTA / VIOLETA / CIAN)
     // =======================================================
     const pCanvas = document.getElementById("particles-canvas");
     const pCtx = pCanvas.getContext("2d");
@@ -2147,9 +2030,9 @@
         this.twinkleRate = Math.random() * 0.04 + 0.01;
         this.twinkleDir = 1;
 
-        // Paleta oficial: Azul, Cian, Violeta, Magenta, Blanco Hielo
+        // Paleta Glamour: Blanco, Fucsia, Rosa, Violeta, Azul Cian, Rosa Pastel, Dorado
         const colors = [
-          '#ffffff', '#00d9ff', '#5cebff', '#164dff', '#258bff', '#7a2cff', '#d21fff', '#eaf7ff'
+          '#ffffff', '#ff007f', '#ff3399', '#9d4edd', '#00d4ff', '#fbcfe8', '#fcd34d'
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -2210,7 +2093,7 @@
       }
     }
 
-    // Inicializar 65 partículas ambientales
+    // Inicializar partículas ambientales
     for (let i = 0; i < 65; i++) {
       particlesList.push(new DiscoParticle(false));
     }
@@ -2251,9 +2134,8 @@
       playDiscoAudio();
 
       ballSpeedMultiplier = 3.5;
-      if (discoBlueLightRef) discoBlueLightRef.intensity = 9.0;
+      if (discoPinkLightRef) discoPinkLightRef.intensity = 9.5;
       if (discoCyanLightRef) discoCyanLightRef.intensity = 8.5;
-      if (discoVioletLightRef) discoVioletLightRef.intensity = 7.0;
 
       cinematicFlash.classList.add("active");
       triggerDiscoWaterfall();
@@ -2271,9 +2153,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             ballSpeedMultiplier = 1.0;
-            if (discoBlueLightRef) discoBlueLightRef.intensity = 6.2;
+            if (discoPinkLightRef) discoPinkLightRef.intensity = 6.5;
             if (discoCyanLightRef) discoCyanLightRef.intensity = 5.5;
-            if (discoVioletLightRef) discoVioletLightRef.intensity = 4.8;
           }, 60);
 
         }, 450);
@@ -2301,7 +2182,7 @@
     });
 
     // =======================================================
-    // PLAYLIST INTERACTIVA (LÓGICA ESTRICTA: MÁXIMO 2 CANCIONES)
+    // PLAYLIST INTERACTIVA (MÁXIMO 2 CANCIONES)
     // =======================================================
     const pTitleIn = document.getElementById("playlist-title-in");
     const pArtistIn = document.getElementById("playlist-artist-in");
