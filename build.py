@@ -1779,9 +1779,9 @@ html_code = """<!DOCTYPE html>
 
   <script>
     // =======================================================
-    // NÚMERO DE TELÉFONO DE PRUEBAS (WHATSAPP BUSINESS)
+    // NÚMERO DE WHATSAPP OFICIAL DE LA QUINCEAÑERA
     // =======================================================
-    const WHATSAPP_PHONE = "51945221946";
+    const WHATSAPP_PHONE = "51931228951";
 
     // =======================================================
     // REPRODUCTOR DE MÚSICA & DISCO DE VINILO
@@ -2256,7 +2256,15 @@ html_code = """<!DOCTYPE html>
         return;
       }
 
-      const textMsg = `¡Hola Angeles! 🪩✨\nSoy *${guestName}* y confirmo mi asistencia a tu fiesta de 15 años Disco Party (19 de Octubre):\n👉 *${guestChoice}*`;
+      const textMsg = 
+        `¡Hola Angeles! 🪩✨\n\n` +
+        `> *CONFIRMACIÓN DE ASISTENCIA*\n` +
+        `> 👤 *Invitado:* ${guestName}\n` +
+        `> 🎟️ *Respuesta:* ${guestChoice}\n` +
+        `> 📅 *Fecha:* Lunes, 19 de Octubre del 2026\n` +
+        `> ⏰ *Hora:* 7:00 PM\n` +
+        `> 📍 *Lugar:* Calle Héroes Nacionales N° 519\n\n` +
+        `¡Muchísimas felicidades por tus 15 años! 🎉💃🪩`;
       const wpUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(textMsg)}`;
       
       window.open(wpUrl, "_blank");
@@ -2375,10 +2383,13 @@ html_code = """<!DOCTYPE html>
       const currentSongs = getGuestSongs();
       if (currentSongs.length === 0) return;
 
-      let msg = "¡Hola Angeles! 🪩🎶 Mis canciones sugeridas para tu fiesta de 15 años son:\n";
+      let msg = 
+        `¡Hola Angeles! 🪩🎶\n\n` +
+        `> *MIS CANCIONES SUGERIDAS*\n`;
       currentSongs.forEach((s, idx) => {
-        msg += `${idx + 1}. *${s.title}* - ${s.artist}\n`;
+        msg += `> 🎵 *${idx + 1}.* ${s.title} — ${s.artist}\n`;
       });
+      msg += `\n¡Listos para romper la pista de baile! 💃🎧✨`;
 
       const wpUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(msg)}`;
       window.open(wpUrl, "_blank");
